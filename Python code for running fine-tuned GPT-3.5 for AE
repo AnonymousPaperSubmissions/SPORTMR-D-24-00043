@@ -1,0 +1,69 @@
+#Note the code is carried out on Google Colab
+
+#Install dependency
+!pip install openai
+
+#Import dependecies
+import openai
+import pandas as pd
+
+# Set up OpenAI API Key securely
+from google.colab import userdata
+api_key = userdata.get('GPT-3.5_KEY')
+client = openai.client(api_key=api_key)
+
+# Load the CSV file
+df = pd.read_csv('YOUR FILE PATH')
+
+# Create a new column in the DataFrame to store the results
+df['Aspect'] = ''
+
+# Define the system prompt
+system_prompt = ("""
+    You are an expert in college football, specializing in analyzing Tripadvisor reviews of college football stadiums, focusing on game day experiences.
+    Each review consists of sentences that need to be treated individually. Within these sentences, identify various aspects of the game day experience, noting that a single aspect can have multiple descriptions.
+    For aspect extraction in each sentence of a review, the process must be followed carefully. Ensure each step is taken one at a time for optimal clarity and results:
+    1. Analyze each sentence as a separate unit.
+    2. Identify the different aspects of the game day experience mentioned.
+    3. For aspects with multiple descriptions within the same sentence, list each description as a separate entry, including the aspect in the detail for clarity.
+    4. Extract each aspect and its corresponding detailed description.
+    5. Format this information in a JSON structure using '''Aspect_i''' and '''Details_i''' as keys, incrementing '''i''' for each new aspect or unique description.
+    """
+)
+
+for index, row in df.iterrows():
+    if pd.notna(row['Text']):
+        conversation = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": row['Text']}
+        ]
+
+        try:
+            response = client.chat.completions.create(
+                model="ft:gpt-3.5-turbo-1106:qian:cxae:8kZXONLd",
+                messages=conversation,
+                temperature=0,
+                max_tokens=2048
+            )
+                #response_format={ "type": "json_object" }
+
+            # Assuming the response is an object with attributes, we use dot notation
+            # If this raises an error, then your environment may be different and require dictionary access
+            content = response.choices[0].message.content
+
+            # Debug: Print the response
+            print(f"Index {index} - Response: {content}")
+
+            # Assign the response to the DataFrame
+            df.at[index, 'Aspect'] = content
+
+        except Exception as e:
+            print(f"Error processing index {index}: {e}")
+    else:
+        print(f"Skipping index {index}: 'Text' column is NaN")
+
+# Debug: Print the DataFrame before saving
+print(df.head())
+
+# Save the DataFrame
+df.to_csv('YOUR FILE PATH', index=False)

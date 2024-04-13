@@ -10,4 +10,4 @@ Testing_analysis.csv: This testing dataset is specifically curated for conductin
 
 RoBERTa_eval_data.csv: This dataset, extracted from the training data, is used for model evaluation.
 
-Python_code_used_for_SPORTMR_D_24_00043.ipynb: Python code ran on Google Colab is provided for performing fine-tuning, AE & CC, and sentiment analysis.
+Python_code_SPORTMR_D_24_00043.ipynb: Python code ran on Google Colab is provided for performing fine-tuning, AE & CC, and sentiment analysis.

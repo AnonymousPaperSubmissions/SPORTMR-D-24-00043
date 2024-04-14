@@ -1,13 +1,13 @@
-Training_AE.csv: This training dataset is tailored for the fine-tuning of GPT-3.5 to extract aspects (AE).
+Training_AE: This training dataset is tailored for the fine-tuning of GPT-3.5 to extract aspects (AE).
 
-Training_CC.csv: This training dataset is tailored for the fine-tuning of GPT-3.5 to classify aspects (CC).
+Training_CC: This training dataset is tailored for the fine-tuning of GPT-3.5 to classify aspects (CC).
 
-Testing_raw_data.csv: This testing dataset includes review texts along with their relevant metadata.
+Testing_raw_data: This testing dataset includes review texts along with their relevant metadata.
 
-Testing_all_variables.csv: This comprehensive testing dataset encompasses all variables utilized in the dataset's development for statistical analysis.
+Testing_all_variables: This comprehensive testing dataset encompasses all variables utilized in the dataset's development for statistical analysis.
 
-Testing_analysis.csv: This testing dataset is specifically curated for conducting statistical analysis.
+Testing_analysis: This testing dataset is specifically curated for conducting statistical analysis.
 
-RoBERTa_eval_data.csv: This dataset, extracted from the training data, is used for model evaluation.
+RoBERTa_eval_data: This dataset, extracted from the training data, is used for model evaluation.
 
-Python_code_SPORTMR_D_24_00043.ipynb: Python code ran on Google Colab is provided for performing fine-tuning, AE & CC, and sentiment analysis.
+Python_code_SPORTMR_D_24_00043: Python code ran on Google Colab is provided for performing fine-tuning, AE & CC, and sentiment analysis.
